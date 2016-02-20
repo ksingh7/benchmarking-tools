@@ -2,7 +2,8 @@
 echo 3 > /proc/sys/vm/drop_caches
 
 fio_test_dir=/mnt/ceph-1tb
-fio_test_size=10
+# Test size in MB
+fio_test_size=100
 
 fio_output_dir=$fio_test_dir/fio_output
 mkdir $fio_output_dir
