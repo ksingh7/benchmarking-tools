@@ -3,10 +3,20 @@ echo 3 > /proc/sys/vm/drop_caches
 
 fio_test_dir=/mnt/ceph-1tb
 # Test size in MB
-fio_test_size=100
+fio_test_size=1024
 
 fio_output_dir=$fio_test_dir/fio_output
-mkdir $fio_output_dir
+now=`date +"%d-%m-%Y-%H-%M-%S"`
+
+if [ -d "$fio_output_dir" ]; then
+   echo "$fio_output_dir directory already exists, renaming existing directory"
+   mv $fio_output_dir ${fio_output_dir}'_'${now}
+   echo "Creating new $fio_output_dir directory"
+   mkdir $fio_output_dir
+else
+   echo "Creating new $fio_output_dir directory"
+   mkdir $fio_output_dir
+fi
 
 # test order: sequential write with large block size first, so
 # that the test files are fully laid out before other tests
