@@ -1,4 +1,4 @@
-prerequisite
+Prerequisite
 ----------
 - fio package should be installed
 - Mount your block device that needs to be tested. Update run_me.sh with its path
