@@ -1,4 +1,6 @@
 # benchmarking-tools
 Storage benchmarking tools and tests and results
 * iozone
-* fio
+* fio  
+
+Refer to tool specific README file
