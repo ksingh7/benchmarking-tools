@@ -1,3 +1,8 @@
+prerequisite
+----------
+- fio package should be installed
+- Mount your block device that needs to be tested. Update run_me.sh with its path
+
 How to use
 -----------
 Before starting the test, verify test case with various tunable parameters defined in ``run_me.sh``
