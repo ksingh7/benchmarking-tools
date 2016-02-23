@@ -32,5 +32,6 @@ The output file will be in the format ``fio_write-1-1-4096k.out`` which expands 
 
 What's Coming
 -------------
+- Latency results
 - Output parsing directly to CSV
 - Graph generation
