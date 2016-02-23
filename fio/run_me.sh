@@ -1,5 +1,7 @@
 #!/bin/bash
+
 # Author: Karan Singh
+# Inspired by Olli Tourunen <Olli.Tourunen@csc.fi>
 
 ###########
 ## Notes ##
