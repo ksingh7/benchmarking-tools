@@ -29,3 +29,8 @@ Conventions
 The output file will be in the format ``fio_write-1-1-4096k.out`` which expands to
 
 ```fio_(Test Method)_(Test Count)_(Number of Workers)_(Block Size)```
+
+What's Coming
+-------------
+- Output parsing directly to CSV
+- Graph generation
