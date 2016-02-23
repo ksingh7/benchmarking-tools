@@ -1,7 +1,10 @@
 How to use
 -----------
-1. Direct run  ``$ sh run_me.sh`` 
-2. Run in background  ``$ nohup sh run_me.sh &`` 
+Before starting the test, verify test case with various tunable parameters defined in ``run_me.sh``
+Once you are ready , run the test in either of these two ways ( or your own way )
+
+- Direct run  ``$ sh run_me.sh`` 
+- Run in background  ``$ nohup sh run_me.sh &`` 
 
 Sample Output
 -------------
