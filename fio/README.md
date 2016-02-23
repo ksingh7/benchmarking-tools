@@ -1,7 +1,9 @@
-how to use
----------
+How to use
+-----------
 1. Direct run
-sh run_me.sh 
+
+```sh run_me.sh``` 
 
 2. Run in background
-nohup sh run_me.sh & 
+
+```nohup sh run_me.sh &``` 
