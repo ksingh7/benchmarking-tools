@@ -1,5 +1,7 @@
 how to use
 ---------
-sh fio_test.sh
+1. Direct run
+sh run_me.sh 
 
-nohup sh fio_test.sh
+2. Run in background
+nohup sh run_me.sh & 
