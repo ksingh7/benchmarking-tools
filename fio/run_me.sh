@@ -1,13 +1,16 @@
 #!/bin/bash
+# Author: Karan Singh
 
-# Note # 
-# sequential write with large block size first, so  that the test files are fully laid out before other tests
+###########
+## Notes ##
+###########
+# 1. sequential write with large block size first, so  that the test files are fully laid out before other tests
 
 # Mount point where block device is mounted
 fio_test_dir=/mnt/ceph-1tb
 
 # Test size in MB
-fio_test_size=10
+fio_test_size=1024
 
 # Number of workers
 workers=32
@@ -16,10 +19,10 @@ workers=32
 fio_output_dir=$fio_test_dir/fio_output
 
 # Different block sizes to test with. Example : 8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k
-block_size="4096k"
+block_size="8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k"
 
 # The test method that should be used by fio, Example : write randwrite readwrite read randread
-test_method="write"
+test_method="write randwrite readwrite read randread"
 
 # Repeat the test for better averaging
 repeat=1
@@ -61,7 +64,7 @@ for fio_test in $test_method ; do
   done
 done
 
-# Loop to extract result of fio test , creates a file with name fio_result_%date
+# Loop to extract result of fio test , creates a file with name results/fio_result_%date
 for fio_test in $test_method ; do
   for bs in $block_size ; do
     for ((i=1;i<=$repeat;i+=1)) ; do
