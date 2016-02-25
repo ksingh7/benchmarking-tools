@@ -15,6 +15,19 @@
         hostname: "{{item.name}}"
         group: "{{ nova_server_group }}"
   with_items: instance_detail
+  when: not anti_affinity
+
+- name: launch openstack instances with anti-affinity
+  command: > 
+       nova boot \
+       --image "{{ image }}" \
+       --flavor "{{ flavour_name }}" \
+       --security-group "{{ security_group_name }}"  \
+       --key-name "{{ key_name }}" \
+       --hint group="{{ nova_server_group }}" \
+       --nic net-id="{{ nics_net_id }}" "{{item.name}}" \
+  when: anti_affinity
+  with_items: instance_detail
 
 - name: create volumes
   os_volume:
