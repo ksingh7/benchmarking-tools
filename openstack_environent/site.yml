@@ -4,4 +4,4 @@
   gather_facts: no
   connection: local
   roles:
-   - launch_instances
+   - create_resources

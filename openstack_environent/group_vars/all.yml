@@ -9,9 +9,11 @@ nova_server_group: "b75981a0-b5f2-4365-bcb0-b9d1dfc24111"
 anti_affinity: true
 
 volume_type: "standard"
-volume_size: "10"
-destroy_volume: true
+volume_size: "1024"
+destroy_volume: false 
 
 instance_detail:
    - { name: node1 , volume_name: node1_volume1}
-   - { name: node2 , volume_name: node1_volume2}
+#   - { name: node2 , volume_name: node2_volume1}
+#   - { name: node3 , volume_name: node3_volume1}
+#   - { name: node4 , volume_name: node4_volume1}
