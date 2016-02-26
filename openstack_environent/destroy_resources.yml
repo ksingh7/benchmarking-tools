@@ -1,0 +1,7 @@
+---
+- name: destroy resources
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+   - destroy_resources 
