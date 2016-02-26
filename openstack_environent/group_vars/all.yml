@@ -2,18 +2,32 @@
 
 image: "08bda408-0fdf-4038-8ec0-98a1ce6164de"
 key_name: "karan-new"
-flavour_name: "small"
+flavour_name: "tiny"
 security_group_name: "default"
 nics_net_id: "b3f9f562-18d1-40f5-a668-9988215922a1"
 nova_server_group: "b75981a0-b5f2-4365-bcb0-b9d1dfc24111"
 anti_affinity: true
 
 volume_type: "standard"
-volume_size: "1024"
+volume_size: "10"
 destroy_volume: false 
+disk_path: "/dev/vdc"
+mount_point: "/mnt/ceph-disk"
 
 instance_detail:
    - { name: node1 , volume_name: node1_volume1}
-#   - { name: node2 , volume_name: node2_volume1}
-#   - { name: node3 , volume_name: node3_volume1}
+   - { name: node2 , volume_name: node2_volume1}
+   - { name: node3 , volume_name: node3_volume1}
 #   - { name: node4 , volume_name: node4_volume1}
+
+packages:
+   - fio
+   - dstat
+   - xfsprogs  
+   - pdsh
+   - btrfs-progs
+   - tree
+   - wget
+   - tmux
+   - bash-completion
+   - dstat
