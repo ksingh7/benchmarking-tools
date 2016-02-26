@@ -23,7 +23,7 @@
     fstype: xfs 
     dev: "{{ disk_path }}" 
     opts: "-L ephemeral0" 
-    force: yes
+    force: no 
   when: ceph_device.stat.exists
 
 - name: mount ephemeral disk again
@@ -45,5 +45,7 @@
 
 - name: set pdsh default transport to ssh
   lineinfile: name=/etc/pdsh/rcmd_default create=yes line='ssh' state=present
+
+- include: benchmarking.yml
 
 

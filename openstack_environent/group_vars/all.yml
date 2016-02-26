@@ -12,7 +12,7 @@ volume_type: "standard"
 volume_size: "10"
 destroy_volume: false 
 disk_path: "/dev/vdc"
-mount_point: "/mnt/ceph-disk"
+mount_point: "/mnt/bench-disk"
 
 instance_detail:
    - { name: node1 , volume_name: node1_volume1}
@@ -31,3 +31,8 @@ packages:
    - tmux
    - bash-completion
    - dstat
+   - git
+   - screen
+
+benchmarking_script: "https://raw.githubusercontent.com/ksingh7/benchmarking-tools/master/fio/run_me.sh"
+benchmarking_directory_path: "/benchmarking"

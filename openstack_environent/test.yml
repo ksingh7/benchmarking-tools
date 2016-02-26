@@ -1,17 +1,15 @@
 ---
 - name: launch compute instance
-  hosts: localhost
-  gather_facts: no
-  connection: local
+  hosts: common 
   tasks:
-    - name: Check if instance already exists
-      command: nova show "{{item.name}}"
-      with_items: instance_detail
-      ignore_errors: true
-      register: check_instance
+  #  - name: Check if instance already exists
+  #    command: nova show "{{item.name}}"
+  #    with_items: instance_detail
+  #    ignore_errors: true
+  #    register: check_instance
  
-    - debug: var=check_instance
-      when: check_instance.failed
+   # - debug: var=check_instance
+   #   when: check_instance.failed
 
 
     #- debug: msg="failed"
