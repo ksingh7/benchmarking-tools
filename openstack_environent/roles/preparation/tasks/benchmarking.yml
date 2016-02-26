@@ -8,6 +8,11 @@
     path: "{{ benchmarking_directory_path }}"
     state: directory
 
+- name: Create directory for benchmarking results 
+  file:
+    path: "{{ benchmarking_directory_path }}/results"
+    state: directory
+
 - name: downloading benchmarking script
   get_url: 
     url: "{{ benchmarking_script }}"
@@ -18,3 +23,5 @@
   command: "screen -d -m -S behchmarking sh {{ benchmarking_directory_path }}/{{ script_name }}"
   async: 5 
   poll: 0
+  args:
+    chdir: "{{ benchmarking_directory_path }}" 

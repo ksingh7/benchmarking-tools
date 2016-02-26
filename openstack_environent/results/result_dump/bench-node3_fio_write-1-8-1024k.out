@@ -1,0 +1,38 @@
+fio-nw8: (g=0): rw=write, bs=1M-1M/1M-1M/1M-1M, ioengine=sync, iodepth=1
+...
+fio-2.2.8
+Starting 8 processes
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+fio-nw8: Laying out IO file(s) (1 file(s) / 12MB)
+
+fio-nw8: (groupid=0, jobs=8): err= 0: pid=20206: Fri Feb 26 14:56:50 2016
+  write: io=98304KB, bw=75329KB/s, iops=73, runt=  1305msec
+    clat (msec): min=5, max=270, avg=106.60, stdev=89.39
+     lat (msec): min=5, max=270, avg=106.72, stdev=89.40
+    clat percentiles (msec):
+     |  1.00th=[    6],  5.00th=[   10], 10.00th=[   10], 20.00th=[   14],
+     | 30.00th=[   46], 40.00th=[   56], 50.00th=[   62], 60.00th=[  128],
+     | 70.00th=[  155], 80.00th=[  169], 90.00th=[  265], 95.00th=[  269],
+     | 99.00th=[  273], 99.50th=[  273], 99.90th=[  273], 99.95th=[  273],
+     | 99.99th=[  273]
+    bw (KB  /s): min= 7091, max=13653, per=12.98%, avg=9778.62, stdev=2833.42
+    lat (msec) : 10=11.46%, 20=16.67%, 50=8.33%, 100=13.54%, 250=33.33%
+    lat (msec) : 500=16.67%
+  cpu          : usr=0.12%, sys=0.15%, ctx=107, majf=0, minf=232
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued    : total=r=0/w=96/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+  WRITE: io=98304KB, aggrb=75328KB/s, minb=75328KB/s, maxb=75328KB/s, mint=1305msec, maxt=1305msec
+
+Disk stats (read/write):
+  vdc: ios=0/249, merge=0/0, ticks=0/23324, in_queue=27330, util=91.58%

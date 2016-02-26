@@ -1,0 +1,5 @@
+bench-node2_fio_write-1-1-1024k.out:  write: io=102400KB, bw=159006KB/s, iops=155, runt=   644msec
+bench-node2_fio_write-1-2-1024k.out:  write: io=102400KB, bw=151032KB/s, iops=147, runt=   678msec
+bench-node2_fio_write-1-4-1024k.out:  write: io=102400KB, bw=171812KB/s, iops=167, runt=   596msec
+bench-node2_fio_write-1-8-1024k.out:  write: io=98304KB, bw=142470KB/s, iops=139, runt=   690msec
+bench-node2_fio_write-1-16-1024k.out:  write: io=98304KB, bw=118439KB/s, iops=115, runt=   830msec

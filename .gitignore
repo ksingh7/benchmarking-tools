@@ -1,4 +1,6 @@
 fio/nohup.out
 fio/results_3_
+results/*
 nohup.out
+*.retry
 
