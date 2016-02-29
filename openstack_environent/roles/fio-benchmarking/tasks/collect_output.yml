@@ -1,0 +1,33 @@
+---
+#- name: list result files 
+#  action: command ls "{{ benchmarking_directory_path }}/results"
+#  register: dumpfiles
+
+#- name: fetch result  files 
+#  fetch: 
+#    src: "{{ benchmarking_directory_path }}/results/{{ item }}" 
+#    dest: results/result_summary/
+#    flat: yes  
+#  with_items: "{{ dumpfiles.stdout_lines }}" 
+
+#- name: Check if result_summary directory exists 
+#  stat: 
+#   - path: "results/result_summary/{{ run }}"
+#  delegate_to: 127.0.0.1
+#  register: directory_check 
+
+#- name: Rename existing run directory 
+#  command: mv "results/result_summary/{{ run }}" "results/result_summary/{{ run }}_{{ ansible_date_time.date }}" 
+#  delegate_to: 127.0.0.1
+#  when: directory_check.exists
+
+- name: list summary files
+  command: ls "{{ mount_point }}/fio_output"
+  register: dump_summary_files
+
+- name: fetch result summary 
+  fetch:
+    src: "{{ mount_point }}/fio_output/{{ item }}" 
+    dest: "results/result_summary/{{ run }}/"
+    flat: yes 
+  with_items: "{{ dump_summary_files.stdout_lines }}"

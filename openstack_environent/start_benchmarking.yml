@@ -1,0 +1,7 @@
+---
+- name: Prepare resources for benchmarking 
+  hosts: common 
+  gather_facts: no
+  become: true
+  roles:
+   - fio-benchmarking

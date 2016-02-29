@@ -43,9 +43,5 @@
 - name: disable SELinux (CentOS)
   action: selinux state=disabled
 
-- name: set pdsh default transport to ssh
-  lineinfile: name=/etc/pdsh/rcmd_default create=yes line='ssh' state=present
-
 - include: benchmarking.yml
-
 

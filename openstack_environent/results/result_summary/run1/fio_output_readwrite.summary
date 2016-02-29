@@ -1,0 +1,6 @@
+Hostname Pattern Block_size Threads Read_Bandwidth_KB/s Read_IOPS Read_latency_mean Read_Total_I/O_KB Read_runtime_ms Write_Bandwidth_KB/s Write_IOPS Write_latency_mean Write_Total_I/O_KB Write_runtime_ms
+bench-node3 readwrite 1024k 1 47038 45 20564.846154 13312 283 25328 24 2052.714286 7168 283
+bench-node3 readwrite 1024k 2 289391 282 3732.923077 13312 46 155826 152 3003.285714 7168 46
+bench-node3 readwrite 1024k 4 469333 458 4108.181818 11264 24 384000 375 4370.444444 9216 24
+bench-node3 readwrite 1024k 8 354461 346 8738.222222 9216 26 398222 388 6601.285714 7168 18
+bench-node3 readwrite 1024k 16 368640 360 14742.888889 9216 25 298666 291 20517.714286 7168 24

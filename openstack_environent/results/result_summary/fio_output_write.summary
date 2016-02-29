@@ -1,0 +1,6 @@
+Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms 
+bench-node3 write 1024k 1 359298 350 2823.850000 20480 57
+bench-node3 write 1024k 2 640000 625 3115.350000 20480 32
+bench-node3 write 1024k 4 296811 289 13305.850000 20480 69
+bench-node3 write 1024k 8 381023 372 16424.812500 16384 43
+bench-node3 write 1024k 16 630153 615 19405.000000 16384 26

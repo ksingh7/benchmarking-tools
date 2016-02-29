@@ -1,7 +1,7 @@
 ---
-- name: launch compute instance
+- name: Gather FIO results 
   hosts: common 
   gather_facts: no
   become: true
   tasks:
-   - include: roles/preparation/tasks/collect_output.yml
+   - include: roles/fio-benchmarking/tasks/collect_output.yml

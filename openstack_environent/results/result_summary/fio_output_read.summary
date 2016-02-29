@@ -1,0 +1,6 @@
+Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms 
+bench-node2 read 1024k 1 204800 200 4929.800000 20480 100
+bench-node2 read 1024k 2 365714 357 5493.550000 20480 56
+bench-node2 read 1024k 4 620606 606 3948.350000 20480 33
+bench-node2 read 1024k 8 655360 640 6251.750000 16384 25
+bench-node2 read 1024k 16 682666 666 9770.812500 16384 24

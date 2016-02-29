@@ -1,2 +1,29 @@
 [common]
 bench-node[1:3]
+
+# Run benchmarking on 1 node
+#[run1]
+#bench-node1 run=run1
+#
+# Run benchmarking on 2 nodes
+#[run2]
+#bench-node1 run=run2
+#bench-node2 run=run2
+
+# Run benchmarking on 4 nodes
+#[run3]
+#bench-node1 run=run3
+#bench-node2 run=run3
+#bench-node3 run=run3
+#bench-node4 run=run3
+
+# Run benchmarking on 8 nodes
+#[run4]
+#bench-node1 run=run4
+#bench-node2 run=run4
+#bench-node3 run=run4
+#bench-node4 run=run4
+#bench-node5 run=run4
+#bench-node6 run=run4
+#bench-node7 run=run4
+#bench-node8 run=run4
