@@ -2,6 +2,7 @@
 
 # Author: Karan Singh
 # Inspired by Olli Tourunen <Olli.Tourunen@csc.fi>
+# Version - 2.0
 
 ###########
 ## Notes ##
@@ -51,17 +52,15 @@ echo " ================================================= "
 
 for fio_test in $test_method ; do
 
-if [ "$fio_test" == "write" ] || [ "$fio_test" == "randwrite" ]; then
-echo "Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms " >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
-
-if [ "$fio_test" == "read" ] || [ "$fio_test" == "randread" ]; then
-echo "Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms " >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
-
-if [ "$fio_test" == "readwrite" ] || [ "$fio_test" == "writeread" ]; then
-echo "Hostname Pattern Block_size Threads Read_Bandwidth_KB/s Read_IOPS Read_latency_mean Read_Total_I/O_KB Read_runtime_ms Write_Bandwidth_KB/s Write_IOPS Write_latency_mean Write_Total_I/O_KB Write_runtime_ms" >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
+ if [ "$fio_test" == "write" ] || [ "$fio_test" == "randwrite" ]; then
+  echo "Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms " >> $fio_output_dir/fio_output_"$fio_test".summary;
+ fi
+ if [ "$fio_test" == "read" ] || [ "$fio_test" == "randread" ]; then
+  echo "Hostname Pattern Block_size Threads Bandwidth_KB/s IOPS Latency_mean Total_I/O_KB Rununtime_ms " >> $fio_output_dir/fio_output_"$fio_test".summary;
+ fi
+ if [ "$fio_test" == "readwrite" ] || [ "$fio_test" == "writeread" ]; then
+  echo "Hostname Pattern Block_size Threads Read_Bandwidth_KB/s Read_IOPS Read_latency_mean Read_Total_I/O_KB Read_runtime_ms Write_Bandwidth_KB/s Write_IOPS Write_latency_mean Write_Total_I/O_KB Write_runtime_ms" >> $fio_output_dir/fio_output_"$fio_test".summary;
+ fi
 
   for bs in $block_size ; do
     for ((i=1;i<=$repeat;i+=1)) ; do
@@ -78,35 +77,35 @@ fi
         sed "s/$/;$nw;$bs;$fio_test/" $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out > $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output;
         rm $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out;
 
-if [ "$fio_test" == "write" ] || [ "$fio_test" == "randwrite" ]; then
-cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$48,$49,$81,$47,$50}' >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
+	if [ "$fio_test" == "write" ] || [ "$fio_test" == "randwrite" ]; then
+	cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$48,$49,$81,$47,$50}' >> $fio_output_dir/fio_output_"$fio_test".summary;
+	fi
 
-if [ "$fio_test" == "read" ] || [ "$fio_test" == "randread" ]; then
-cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$7,$8,$40,$6,$9}' >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
+	if [ "$fio_test" == "read" ] || [ "$fio_test" == "randread" ]; then
+	cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$7,$8,$40,$6,$9}' >> $fio_output_dir/fio_output_"$fio_test".summary;
+	fi
 
-if [ "$fio_test" == "readwrite" ] || [ "$fio_test" == "writeread" ]; then
-cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$7,$8,$40,$6,$9,$48,$49,$81,$47,$50}' >> $fio_output_dir/fio_output_"$fio_test".summary;
-fi
-
-        sleep 1
+	if [ "$fio_test" == "readwrite" ] || [ "$fio_test" == "writeread" ]; then
+	cat $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | awk -F ';' '{print $3,$133,$132,$131,$7,$8,$40,$6,$9,$48,$49,$81,$47,$50}' >> $fio_output_dir/fio_output_"$fio_test".summary;
+	fi
+	
       done
     done
   done
 done
 
 # Loop to extract result of fio test , creates a file with name results/fio_result_%date
-for fio_test in $test_method ; do
-  for bs in $block_size ; do
-    for ((i=1;i<=$repeat;i+=1)) ; do
-      for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2,size/=2)); do
-	grep --with-filename iops $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | sort -t "-" -k 2n | sed -r "s/.*fio_output\///" >> results/fio_result_`hostname`_`date +"%d-%m-%Y-%H-%M-%S"`
-      done
-    done
-  done
-done
-echo " ================================================= "
+#for fio_test in $test_method ; do
+#  for bs in $block_size ; do
+#    for ((i=1;i<=$repeat;i+=1)) ; do
+#      for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2,size/=2)); do
+#	grep --with-filename iops $fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.output | sort -t "-" -k 2n | sed -r "s/.*fio_output\///" >> results/fio_result_`hostname`_`date +"%d-%m-%Y-%H-%M-%S"`
+#      done
+#    done
+#  done
+#done
+echo " =========================================================== "
 echo "               Benchmarking Completed "
-echo " Results : results/fio_result_`hostname`_`date +"%d-%m-%Y-%H-%M"`-*"
-echo " ================================================= "
+#echo " Results : results/fio_result_`hostname`_`date +"%d-%m-%Y-%H-%M"`-*"
+echo " Results: $fio_output_dir/fio_output_*TestMethod.summary files"
+echo " =========================================================== "
