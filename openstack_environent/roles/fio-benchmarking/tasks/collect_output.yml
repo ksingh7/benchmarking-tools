@@ -10,16 +10,16 @@
 #    flat: yes  
 #  with_items: "{{ dumpfiles.stdout_lines }}" 
 
-#- name: Check if result_summary directory exists 
-#  stat: 
-#   - path: "results/result_summary/{{ run }}"
-#  delegate_to: 127.0.0.1
-#  register: directory_check 
+- name: Check if result_summary directory exists 
+  stat: path="results/result_summary/{{ run }}"
+  delegate_to: 127.0.0.1
+  register: directory_check 
+  run_once: true
 
-#- name: Rename existing run directory 
-#  command: mv "results/result_summary/{{ run }}" "results/result_summary/{{ run }}_{{ ansible_date_time.date }}" 
-#  delegate_to: 127.0.0.1
-#  when: directory_check.exists
+- name: Rename existing run directory 
+  local_action: command  mv "results/result_summary/{{ run }}" "results/result_summary/{{ run }}_{{ ansible_date_time.iso8601 }}" 
+  when: directory_check.stat.isdir
+  run_once: true
 
 - name: list summary files
   command: ls "{{ mount_point }}/fio_output"

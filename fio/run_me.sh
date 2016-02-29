@@ -13,19 +13,19 @@
 fio_test_dir=/mnt/bench-disk
 
 # Test size in MB
-fio_test_size=20
+fio_test_size=10240
 
 # Number of workers
-workers=16
+workers=128
 
 # Output directory to store fio results
 fio_output_dir=$fio_test_dir/fio_output
 
 # Different block sizes to test with. Example : 8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k
-block_size="1024k"
+block_size="8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k"
 
 # The test method that should be used by fio, Example : write randwrite readwrite read randread
-test_method="write read readwrite"
+test_method="write randwrite readwrite read randread"
 
 # Repeat the test for better averaging
 repeat=1
