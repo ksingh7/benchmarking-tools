@@ -1,0 +1,7 @@
+---
+- name: launch compute instance
+  hosts: common 
+  gather_facts: no
+  become: true
+  roles:
+   - preparation 

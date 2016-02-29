@@ -1,0 +1,6 @@
+fio/nohup.out
+fio/results_3_
+openstack_environent/results/*
+nohup.out
+*.retry
+

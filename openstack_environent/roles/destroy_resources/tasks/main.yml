@@ -1,0 +1,38 @@
+---
+- name: detaching volumes from hosts
+  os_server_volume:
+    state: absent 
+    server: "{{item.name}}"
+    volume: "{{item.volume_name}}"
+    device: "{{ disk_path }}" 
+    wait: no
+  with_items: instance_detail
+
+- name: destroying OpenStack Instance
+  os_server:
+    state: absent 
+    name: "{{item.name}}"
+    image: "{{ image }}"
+    key_name: "{{ key_name }}"
+    timeout: 200
+    flavor: "{{ flavour_name }}"
+    security_groups: "{{ security_group_name }}"
+    auto_ip: false
+    wait: no
+    nics:
+        - net-id: "{{ nics_net_id }}"
+    meta:
+        hostname: "{{item.name}}"
+        group: "{{ nova_server_group }}"
+  with_items: instance_detail
+
+- name: destroying volumes
+  os_volume:
+    state: absent 
+    wait: no
+    volume_type: "{{ volume_type }}"
+    size: "{{ volume_size }}"
+    display_name: "{{item.volume_name}}"
+    display_description: "Ceph volume for {{item.name}}"
+  with_items: instance_detail
+  when: destroy_volume

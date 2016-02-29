@@ -1,0 +1,76 @@
+---
+- name: launch OpenStack Instance
+  os_server:
+    state: present
+    name: "{{item.name}}"
+    image: "{{ image }}"
+    key_name: "{{ key_name }}"
+    timeout: 200
+    flavor: "{{ flavour_name }}"
+    security_groups: "{{ security_group_name }}"
+    auto_ip: false
+    wait: yes 
+    nics:
+        - net-id: "{{ nics_net_id }}"
+    meta:
+        hostname: "{{item.name}}"
+        group: "{{ nova_server_group }}"
+  with_items: instance_detail
+  when: not anti_affinity
+
+#- name: Check if instance already exists
+#  command: nova show "{{item.name}}"
+#  with_items: instance_detail
+#  ignore_errors: true
+#  register: check_instance
+
+#- debug: var=check_instance
+#  when: check_instance.failed
+
+- name: launch openstack instances with anti-affinity
+  command: > 
+       nova boot \
+       --image "{{ image }}" \
+       --flavor "{{ flavour_name }}" \
+       --security-group "{{ security_group_name }}"  \
+       --key-name "{{ key_name }}" \
+       --hint group="{{ nova_server_group }}" \
+       --nic net-id="{{ nics_net_id }}" "{{item.name}}" \
+  when: anti_affinity
+  with_items: instance_detail
+
+- name: wait for a few seconds
+  pause: seconds=30 
+  when: anti_affinity
+
+#- name: debug 
+#  os_server_facts:
+#   server: "{{item.name}}" 
+#  with_items: instance_detail
+#  register: server_status
+#
+#- debug: msg="{{ openstack_servers }}"
+#
+#- debug:
+#   var: openstack_servers
+#  when: server_status.OS-EXT-STS:vm_state == "active"
+
+
+- name: create volumes
+  os_volume:
+    state: present
+    wait: yes 
+    volume_type: "{{ volume_type }}"
+    size: "{{ volume_size }}"
+    display_name: "{{item.volume_name}}"
+    display_description: "Ceph volume for {{item.name}}"
+  with_items: instance_detail
+
+- name: attaching volumes to hosts
+  os_server_volume:
+    state: present
+    server: "{{item.name}}"
+    volume: "{{item.volume_name}}"
+    device: "{{ disk_path }}" 
+    wait: yes 
+  with_items: instance_detail

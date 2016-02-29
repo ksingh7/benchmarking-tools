@@ -1,0 +1,51 @@
+---
+- name: install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ packages }}"
+
+- name: check if ephemeral disk exists
+  stat: 
+    path: "{{ disk_path }}"
+  register: ceph_device
+
+#- name: umount ephemeral disk
+#  mount: 
+#    name: "{{ mount_point }}" 
+#    src: "{{ disk_path }}" 
+#    fstype: auto 
+#    state: unmounted
+#  when: ceph_device.stat.exists
+
+- name: format ephemeral as xfs 
+  filesystem: 
+    fstype: xfs 
+    dev: "{{ disk_path }}" 
+    opts: "-L ephemeral0" 
+    force: no 
+  when: ceph_device.stat.exists
+
+- name: mount ephemeral disk again
+  mount: 
+    name: "{{ mount_point }}" 
+    src: "{{ disk_path }}"
+    fstype: auto 
+    state: mounted 
+    opts: "nofail"
+  when: ceph_device.stat.exists
+
+- name: update the system (CentOS)
+  yum: 
+   name: "*" 
+   state: latest
+
+- name: disable SELinux (CentOS)
+  action: selinux state=disabled
+
+- name: set pdsh default transport to ssh
+  lineinfile: name=/etc/pdsh/rcmd_default create=yes line='ssh' state=present
+
+- include: benchmarking.yml
+
+

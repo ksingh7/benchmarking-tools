@@ -1,0 +1,27 @@
+---
+ 
+- set_fact: 
+   script_name: "run_me.sh"
+
+- name: Create directory for benchmarking scripts
+  file:
+    path: "{{ benchmarking_directory_path }}"
+    state: directory
+
+- name: Create directory for benchmarking results 
+  file:
+    path: "{{ benchmarking_directory_path }}/results"
+    state: directory
+
+- name: downloading benchmarking script
+  get_url: 
+    url: "{{ benchmarking_script }}"
+    dest: "{{ benchmarking_directory_path }}/{{ script_name }}"
+    mode: 0744
+
+- name: Start benchmarking
+  command: "screen -d -m -S behchmarking sh {{ benchmarking_directory_path }}/{{ script_name }}"
+  async: 5 
+  poll: 0
+  args:
+    chdir: "{{ benchmarking_directory_path }}" 
