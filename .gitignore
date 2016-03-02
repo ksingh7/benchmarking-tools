@@ -3,4 +3,3 @@ fio/results/*
 openstack_environent/results/*
 nohup.out
 *.retry
-openstack_environent/results
