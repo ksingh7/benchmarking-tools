@@ -18,7 +18,7 @@
 
 - name: Rename existing run directory 
   local_action: command  mv "results/result_summary/{{ run }}" "results/result_summary/{{ run }}_{{ ansible_date_time.iso8601 }}" 
-  when: directory_check.stat.isdir
+  when: directory_check.stat.isdir is defined and directory_check.stat.isdir
   run_once: true
 
 - name: list summary files

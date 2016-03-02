@@ -22,7 +22,7 @@ workers=128
 fio_output_dir=$fio_test_dir/fio_output
 
 # Different block sizes to test with. Example : 8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k
-block_size="8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k"
+block_size="8192k 256k 4k"
 
 # The test method that should be used by fio, Example : write randwrite readwrite read randread
 test_method="write randwrite readwrite read randread"
@@ -32,9 +32,6 @@ repeat=1
 
 # Use buffered IO: direct=0  or non buffered IO: direct=1
 direct=1
-
-
-echo 3 > /proc/sys/vm/drop_caches
 
 if [ -d "$fio_output_dir" ]; then
    echo "$fio_output_dir directory already exists, renaming existing directory"
@@ -64,8 +61,9 @@ for fio_test in $test_method ; do
 
   for bs in $block_size ; do
     for ((i=1;i<=$repeat;i+=1)) ; do
-      for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2,size/=2)); do
+      for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2)); do
         echo "starting test fio_$fio_test-$i-$nw-$bs"
+        echo 3 > /proc/sys/vm/drop_caches
         fio --directory=$fio_test_dir --randrepeat=0 --size=${size}M \
             --direct=$direct --bs=$bs --timeout=60 --numjobs=$nw --rw=$fio_test \
             --group_reporting --eta=never --name=`hostname` --minimal --output=$fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out;

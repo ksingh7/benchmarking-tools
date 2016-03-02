@@ -13,9 +13,15 @@
     path: "{{ benchmarking_directory_path }}/results"
     state: directory
 
-- name: downloading benchmarking script
-  get_url: 
-    url: "{{ benchmarking_script }}"
+- name: delete already existing benchmarking script 
+  file:
+    path: "{{ benchmarking_directory_path }}/{{ script_name }}"
+    state: absent 
+
+- name: copying benchmarking script
+  #get_url: 
+  copy:
+    src: "../fio/{{ script_name }}"
     dest: "{{ benchmarking_directory_path }}/{{ script_name }}"
     mode: 0744
 
