@@ -104,6 +104,5 @@ done
 #done
 echo " =========================================================== "
 echo "               Benchmarking Completed "
-#echo " Results : results/fio_result_`hostname`_`date +"%d-%m-%Y-%H-%M"`-*"
 echo " Results: $fio_output_dir/fio_output_*TestMethod.summary files"
 echo " =========================================================== "

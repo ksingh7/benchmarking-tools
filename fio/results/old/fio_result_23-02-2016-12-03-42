@@ -1,4 +1,0 @@
-fio_write-1-1-4096k.out:  write: io=12288KB, bw=42815KB/s, iops=10, runt=   287msec
-fio_write-1-2-4096k.out:  write: io=16384KB, bw=73143KB/s, iops=17, runt=   224msec
-fio_write-1-16-4096k.out:  write: io=10240MB, bw=385761KB/s, iops=94, runt= 27182msec
-fio_write-1-32-4096k.out:  write: io=10240MB, bw=563115KB/s, iops=137, runt= 18621msec
