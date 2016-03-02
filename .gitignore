@@ -1,5 +1,5 @@
 fio/nohup.out
-fio/results/*
+#fio/results/*
 openstack_environent/results/*
 nohup.out
 *.retry
