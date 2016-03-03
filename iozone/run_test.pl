@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+# credits Lassi Lehtinen <lassi.lehtinen@csc.fi>
 
 use strict;
 use warnings;
