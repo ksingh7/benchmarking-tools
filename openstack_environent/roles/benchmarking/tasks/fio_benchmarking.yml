@@ -8,20 +8,23 @@
     path: "{{ benchmarking_directory_path }}"
     state: directory
 
-- name: Create directory for benchmarking results 
-  file:
-    path: "{{ benchmarking_directory_path }}/results"
-    state: directory
+#- name: Create directory for benchmarking results 
+#  file:
+#    path: "{{ benchmarking_directory_path }}/results_{{ benchmarking_tool }}"
+#    state: directory
 
 - name: delete already existing benchmarking script 
   file:
     path: "{{ benchmarking_directory_path }}/{{ script_name }}"
     state: absent 
 
+- name: delete already existing benchmarking files
+  command: "rm -f mount_point/*.*"
+  ignore_errors: true
+
 - name: copying benchmarking script
-  #get_url: 
   copy:
-    src: "../fio/{{ script_name }}"
+    src: "../{{ benchmarking_tool }}/{{ script_name }}"
     dest: "{{ benchmarking_directory_path }}/{{ script_name }}"
     mode: 0744
 

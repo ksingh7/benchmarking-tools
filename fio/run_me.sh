@@ -16,16 +16,17 @@ fio_test_dir=/mnt/bench-disk
 fio_test_size=10240
 
 # Number of workers
-workers=128
+workers=64
 
 # Output directory to store fio results
 fio_output_dir=$fio_test_dir/fio_output
 
 # Different block sizes to test with. Example : 8192k 4096k 2048k 1024k 512k 256k 128k 64k 32k 16k 4k 2k 1k
-block_size="8192k 256k 4k"
+block_size="4k 128k 1024k 4096k"
 
-# The test method that should be used by fio, Example : write randwrite readwrite read randread
-test_method="write randwrite readwrite read randread"
+# The test method that should be used by fio, Example : write read readwrite randread randwrite randrw 
+#test_method="write randwrite readwrite read randread"
+test_method="write read readwrite randread randwrite randrw"
 
 # Repeat the test for better averaging
 repeat=1
@@ -63,10 +64,10 @@ for fio_test in $test_method ; do
     for ((i=1;i<=$repeat;i+=1)) ; do
       for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2)); do
         echo "starting test fio_$fio_test-$i-$nw-$bs"
-        echo 3 > /proc/sys/vm/drop_caches
         fio --directory=$fio_test_dir --randrepeat=0 --size=${size}M \
             --direct=$direct --bs=$bs --timeout=60 --numjobs=$nw --rw=$fio_test \
             --group_reporting --eta=never --name=`hostname` --minimal --output=$fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out;
+        echo 3 > /proc/sys/vm/drop_caches
         if [ ! $? -eq 0 ]; then
           echo "error running FIO, exiting"
           exit 1

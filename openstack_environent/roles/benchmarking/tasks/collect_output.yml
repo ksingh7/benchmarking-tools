@@ -11,13 +11,13 @@
 #  with_items: "{{ dumpfiles.stdout_lines }}" 
 
 - name: Check if result_summary directory exists 
-  stat: path="results/result_summary/{{ run }}"
+  stat: path="results/result_{{ benchmarking_tool }}/{{ run }}"
   delegate_to: 127.0.0.1
   register: directory_check 
   run_once: true
 
 - name: Rename existing run directory 
-  local_action: command  mv "results/result_summary/{{ run }}" "results/result_summary/{{ run }}_{{ ansible_date_time.iso8601 }}" 
+  local_action: command  mv "results/result_{{ benchmarking_tool }}/{{ run }}" "results/result_{{ benchmarking_tool }}/{{ run }}_{{ ansible_date_time.iso8601 }}" 
   when: directory_check.stat.isdir is defined and directory_check.stat.isdir
   run_once: true
 
@@ -28,6 +28,6 @@
 - name: fetch result summary 
   fetch:
     src: "{{ mount_point }}/fio_output/{{ item }}" 
-    dest: "results/result_summary/{{ run }}/"
+    dest: "results/result_{{ benchmarking_tool }}/{{ run }}/"
     flat: yes 
   with_items: "{{ dump_summary_files.stdout_lines }}"

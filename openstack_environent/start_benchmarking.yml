@@ -4,4 +4,4 @@
   gather_facts: no
   become: true
   roles:
-   - fio-benchmarking
+   - benchmarking

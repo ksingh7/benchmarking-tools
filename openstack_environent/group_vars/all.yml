@@ -15,14 +15,14 @@ disk_path: "/dev/vdc"
 mount_point: "/mnt/bench-disk"
 
 instance_detail:
-   - { name: bench_node1 , volume_name: bench_node1_volume2}
-#   - { name: bench_node2 , volume_name: bench_node2_volume1}
-#   - { name: bench_node3 , volume_name: bench_node3_volume1}
-#   - { name: bench_node4 , volume_name: bench_node4_volume1}
-#   - { name: bench_node5 , volume_name: bench_node5_volume1}
-#   - { name: bench_node6 , volume_name: bench_node6_volume1}
-#   - { name: bench_node7 , volume_name: bench_node7_volume1}
-#   - { name: bench_node8 , volume_name: bench_node8_volume1}
+   - { name: bench_node1 , volume_name: bench_node1_volume1}
+   - { name: bench_node2 , volume_name: bench_node2_volume1}
+   - { name: bench_node3 , volume_name: bench_node3_volume1}
+   - { name: bench_node4 , volume_name: bench_node4_volume1}
+   - { name: bench_node5 , volume_name: bench_node5_volume1}
+   - { name: bench_node6 , volume_name: bench_node6_volume1}
+   - { name: bench_node7 , volume_name: bench_node7_volume1}
+   - { name: bench_node8 , volume_name: bench_node8_volume1}
 
 packages:
    - fio
@@ -36,5 +36,8 @@ packages:
    - git
    - screen
 
-benchmarking_script: "https://raw.githubusercontent.com/ksingh7/benchmarking-tools/master/fio/run_me.sh"
-benchmarking_directory_path: "/benchmarking"
+#benchmarking_script: "https://raw.githubusercontent.com/ksingh7/benchmarking-tools/master/fio/run_me.sh"
+benchmarking_directory_path: "/benchmarking_fio"
+
+# either fio or iozone
+benchmarking_tool: fio

@@ -7,6 +7,7 @@
     device: "{{ disk_path }}" 
     wait: no
   with_items: instance_detail
+  ignore_errors: true
 
 - name: destroying OpenStack Instance
   os_server:
