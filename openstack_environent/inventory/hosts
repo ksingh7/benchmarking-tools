@@ -1,5 +1,5 @@
 [common]
-bench-node[1:1]
+bench-node[1:8]
 
 # Run benchmarking on 1 node
 #[run1]

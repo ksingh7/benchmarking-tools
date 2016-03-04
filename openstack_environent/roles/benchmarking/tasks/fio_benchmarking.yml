@@ -19,7 +19,7 @@
     state: absent 
 
 - name: delete already existing benchmarking files
-  command: "rm -f mount_point/*.*"
+  shell: "rm -f {{ mount_point }}/*"
   ignore_errors: true
 
 - name: copying benchmarking script
