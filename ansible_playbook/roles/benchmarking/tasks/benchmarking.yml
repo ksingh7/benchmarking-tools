@@ -1,0 +1,28 @@
+---
+ 
+- set_fact: 
+   script_name: "run_me.sh"
+   benchmarking_directory_path: "{{ mount_point }}_{{ benchmarking_tool }}"
+
+- name: Create directory for benchmarking scripts
+  file:
+    path: "{{ benchmarking_directory_path }}"
+    state: directory
+
+- name: delete already existing benchmarking script 
+  file:
+    path: "{{ benchmarking_directory_path }}"
+    state: absent 
+
+- include: fio_benchmarking.yml 
+  when: benchmarking_tool == "fio"
+
+- include: iozone_benchmarking.yml
+  when: benchmarking_tool == "iozone"
+
+- name: Start benchmarking
+  command: "screen -d -m -S behchmarking sh {{ benchmarking_directory_path }}/{{ script_name }}"
+  async: 5 
+  poll: 0
+  args:
+    chdir: "{{ benchmarking_directory_path }}" 

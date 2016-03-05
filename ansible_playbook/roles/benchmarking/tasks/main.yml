@@ -43,6 +43,5 @@
 - name: disable SELinux (CentOS)
   action: selinux state=disabled
 
-- include: fio_benchmarking.yml
-  when: benchmarking_tool == "fio"
+- include: benchmarking.yml
 

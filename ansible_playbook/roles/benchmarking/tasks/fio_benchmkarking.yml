@@ -1,0 +1,10 @@
+---
+- name: delete already existing benchmarking files
+  shell: "rm -f {{ mount_point }}/*"
+  ignore_errors: true
+
+- name: copying benchmarking script
+  copy:
+    src: "../{{ benchmarking_tool }}/{{ script_name }}"
+    dest: "{{ benchmarking_directory_path }}/{{ script_name }}"
+    mode: 0744
