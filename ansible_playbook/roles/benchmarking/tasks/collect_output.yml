@@ -24,6 +24,7 @@
 - name: list summary files
   command: ls "{{ mount_point }}/fio_output"
   register: dump_summary_files
+  when: benchmarking_tool == "fio"
 
 - name: fetch result summary 
   fetch:
@@ -31,3 +32,19 @@
     dest: "results/result_{{ benchmarking_tool }}/{{ run }}/"
     flat: yes 
   with_items: "{{ dump_summary_files.stdout_lines }}"
+  when: benchmarking_tool == "fio"
+
+- name: list summary files
+  shell: ls "{{ mount_point }}/{{ benchmarking_tool }}"/*.csv.*
+  register: dump_summary_files
+  when: benchmarking_tool == "iozone"
+
+- name: fetch result summary
+  fetch:
+    src: "{{ item }}"
+    dest: "results/result_{{ benchmarking_tool }}/{{ run }}/"
+    flat: yes
+  when: benchmarking_tool == "iozone"
+  with_items: "{{ dump_summary_files.stdout_lines }}"
+
+
