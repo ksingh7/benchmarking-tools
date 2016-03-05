@@ -22,13 +22,13 @@
   run_once: true
 
 - name: list summary files
-  command: ls "{{ mount_point }}/fio_output"
+  shell: ls "{{ mount_point }}"/fio_output/*.summary
   register: dump_summary_files
   when: benchmarking_tool == "fio"
 
 - name: fetch result summary 
   fetch:
-    src: "{{ mount_point }}/fio_output/{{ item }}" 
+    src: "{{ item }}" 
     dest: "results/result_{{ benchmarking_tool }}/{{ run }}/"
     flat: yes 
   with_items: "{{ dump_summary_files.stdout_lines }}"

@@ -1,33 +1,28 @@
 ---
 - name: launch compute instance
   hosts: common 
+  gather_facts: no
   tasks:
-  #  - name: Check if instance already exists
-  #    command: nova show "{{item.name}}"
-  #    with_items: instance_detail
-  #    ignore_errors: true
-  #    register: check_instance
- 
-   # - debug: var=check_instance
-   #   when: check_instance.failed
-
-
-    #- debug: msg="failed"
-    #  when: check_instance.rc == 0
-    #- debug: var=check_instance.rc
-
-
-   #- name: debug
-   #  os_server_facts:
-     # server: "{{item.name}}"
-     #with_items: instance_detail
-   #  register: server_status
-
-   #- debug: msg="{{ openstack_servers }}"
-
-  # - debug:
-  #    var: server_status
-  # - debug:
-      #var: addresses 
-   #   var: "{{ server_status.ansible_facts.openstack_servers.az }}" 
-    # when: server_status.OS-EXT-STS:vm_state == "active"
+    - name: Merge output
+      raw: "for i in read write readwrite randread randwrite ; do cat results/result_{{ benchmarking_tool }}/{{ run }}/*_$i.summary >> results/result_{{ benchmarking_tool }}/{{ run }}/$i.summary ; done"
+      args:
+       chdir: "results/result_{{ benchmarking_tool }}/{{ run }}/"
+      delegate_to: 127.0.0.1
+      
+#    - name: Create file
+#      file: path="results/result_{{ benchmarking_tool }}/{{ run }}/{{ item }}.summary" state=touch
+#      delegate_to: 127.0.0.1
+#      with_items:
+#         - read
+#         - write
+#         - randread
+#         - randwrite 
+#
+#    - name: Merge output
+#      local_action: shell cat "results/result_{{ benchmarking_tool }}/{{ run }}/"*_"{{ item }}".summary >> "results/result_{{ benchmarking_tool }}/{{ run }}/{{ item }}".summary
+#      delegate_to: 127.0.0.1
+#      with_items:
+#         - read
+#         - write
+#         - randread
+#         - randwrite
