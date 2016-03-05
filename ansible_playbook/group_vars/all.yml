@@ -2,27 +2,28 @@
 
 image: "08bda408-0fdf-4038-8ec0-98a1ce6164de"
 key_name: "karan-new"
-flavour_name: "small"
+flavour_name: "tiny"
 security_group_name: "default"
 nics_net_id: "b3f9f562-18d1-40f5-a668-9988215922a1"
 nova_server_group: "b75981a0-b5f2-4365-bcb0-b9d1dfc24111"
-anti_affinity: true
+anti_affinity: false 
 
 volume_type: "standard"
-volume_size: "1024"
-destroy_volume: false 
+volume_size: "100"
+destroy_volume: true 
 disk_path: "/dev/vdc"
 mount_point: "/mnt/bench-disk"
 
 instance_detail:
-   - { name: bench_node1 , volume_name: bench_node1_volume1}
-   - { name: bench_node2 , volume_name: bench_node2_volume1}
-   - { name: bench_node3 , volume_name: bench_node3_volume1}
-   - { name: bench_node4 , volume_name: bench_node4_volume1}
-   - { name: bench_node5 , volume_name: bench_node5_volume1}
-   - { name: bench_node6 , volume_name: bench_node6_volume1}
-   - { name: bench_node7 , volume_name: bench_node7_volume1}
-   - { name: bench_node8 , volume_name: bench_node8_volume1}
+   - { name: iozone , volume_name: iozone}
+ #  - { name: bench_node1 , volume_name: bench_node1_volume1}
+ #  - { name: bench_node2 , volume_name: bench_node2_volume1}
+ #  - { name: bench_node3 , volume_name: bench_node3_volume1}
+ #  - { name: bench_node4 , volume_name: bench_node4_volume1}
+ #  - { name: bench_node5 , volume_name: bench_node5_volume1}
+ #  - { name: bench_node6 , volume_name: bench_node6_volume1}
+ #  - { name: bench_node7 , volume_name: bench_node7_volume1}
+ #  - { name: bench_node8 , volume_name: bench_node8_volume1}
 
 packages:
    - fio
@@ -36,10 +37,9 @@ packages:
    - git
    - screen
    - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
-   - iozone
 
 # either fio or iozone
-benchmarking_tool: fio
+benchmarking_tool: iozone 
 
 #benchmarking_directory_path: "/benchmarking"
-benchmarking_directory_path: "{{ mount_point }}_{{ benchmarking_tool }}"
+#benchmarking_directory_path: "{{ mount_point }}_{{ benchmarking_tool }}"

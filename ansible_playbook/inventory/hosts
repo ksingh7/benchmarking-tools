@@ -1,5 +1,6 @@
 [common]
-bench-node[1:8]
+#bench-node[1:8]
+iozone
 
 # Run benchmarking on 1 node
 #[run1]

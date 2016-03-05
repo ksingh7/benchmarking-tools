@@ -4,19 +4,23 @@
 use strict;
 use warnings;
 
+use Sys::Hostname;
+my $host = hostname;
+
+
 my $def_file = shift or die
         "Usage: $0 FILENAME\n";
 
 open(F,$def_file) or
         die "Unable to open $def_file";
 
-open(T,">results.csv.".time) or
+open(T,">results.csv.$host.".time) or
         die "Unable to open results.csv";
 
-open(RL,">read_latencies.csv.".time) or
+open(RL,">read_latencies.csv.$host.".time) or
         die "Unable to open read_latencies.csv";
 
-open(WL,">write_latencies.csv.".time) or
+open(WL,">write_latencies.csv.$host.".time) or
         die "Unable to open write_latencies.csv";
 
 print T "test_name;write_speed_mb;read_speed_mb;write_speed_ops;read_speed_ops;threads;record_size_kb;file_size;is_sync;start_time;end_time;\n";

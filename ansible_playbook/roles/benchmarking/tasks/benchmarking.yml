@@ -2,17 +2,17 @@
  
 - set_fact: 
    script_name: "run_me.sh"
-   benchmarking_directory_path: "{{ mount_point }}_{{ benchmarking_tool }}"
+   benchmarking_directory_path: "{{ mount_point }}/{{ benchmarking_tool }}"
+
+- name: delete already existing benchmarking script 
+  file:
+    path: "{{ benchmarking_directory_path }}/"
+    state: absent 
 
 - name: Create directory for benchmarking scripts
   file:
     path: "{{ benchmarking_directory_path }}"
     state: directory
-
-- name: delete already existing benchmarking script 
-  file:
-    path: "{{ benchmarking_directory_path }}"
-    state: absent 
 
 - include: fio_benchmarking.yml 
   when: benchmarking_tool == "fio"
