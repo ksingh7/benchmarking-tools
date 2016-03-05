@@ -25,14 +25,18 @@ fio_output_dir=$fio_test_dir/fio_output
 block_size="4k 128k 1024k 4096k"
 
 # The test method that should be used by fio, Example : write read readwrite randread randwrite randrw 
-#test_method="write randwrite readwrite read randread"
 test_method="write read readwrite randread randwrite randrw"
+#test_method="write read readwrite randread randwrite randrw"
 
 # Repeat the test for better averaging
 repeat=1
 
 # Use buffered IO: direct=0  or non buffered IO: direct=1
 direct=1
+
+runtime=600
+
+ioengine=libaio
 
 if [ -d "$fio_output_dir" ]; then
    echo "$fio_output_dir directory already exists, renaming existing directory"
@@ -64,9 +68,9 @@ for fio_test in $test_method ; do
     for ((i=1;i<=$repeat;i+=1)) ; do
       for ((size=$fio_test_size,nw=1;nw<=$workers;nw*=2)); do
         echo "starting test fio_$fio_test-$i-$nw-$bs"
-        fio --directory=$fio_test_dir --randrepeat=0 --size=${size}M \
-            --direct=$direct --bs=$bs --timeout=60 --numjobs=$nw --rw=$fio_test \
-            --group_reporting --eta=never --name=`hostname` --minimal --output=$fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out;
+        fio --directory=$fio_test_dir --randrepeat=0 --eta=never --size=${size}M \
+            --direct=$direct --bs=$bs --numjobs=$nw  --runtime=$runtime --minimal --rw=$fio_test \
+            --group_reporting --ioengine=$ioengine --name=`hostname` --output=$fio_output_dir/`hostname`_fio_$fio_test-$i-$nw-$bs.out;
         echo 3 > /proc/sys/vm/drop_caches
         if [ ! $? -eq 0 ]; then
           echo "error running FIO, exiting"

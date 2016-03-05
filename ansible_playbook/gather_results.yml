@@ -4,4 +4,4 @@
   gather_facts: yes 
   become: true
   tasks:
-   - include: roles/fio-benchmarking/tasks/collect_output.yml
+   - include: roles/benchmarking/tasks/collect_output.yml

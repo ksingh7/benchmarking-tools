@@ -4,3 +4,5 @@ openstack_environent/results/*
 nohup.out
 *.retry
 openstack_environent/results/
+ansible_playbook/results
+ansible_playbook/results/*

@@ -35,9 +35,11 @@ packages:
    - dstat
    - git
    - screen
-
-#benchmarking_script: "https://raw.githubusercontent.com/ksingh7/benchmarking-tools/master/fio/run_me.sh"
-benchmarking_directory_path: "/benchmarking_fio"
+   - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
+   - iozone
 
 # either fio or iozone
 benchmarking_tool: fio
+
+#benchmarking_directory_path: "/benchmarking"
+benchmarking_directory_path: "{{ mount_point }}_{{ benchmarking_tool }}"
