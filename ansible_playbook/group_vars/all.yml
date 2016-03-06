@@ -38,4 +38,4 @@ packages:
    - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
 
 # Select which tool you want to perform benchmarking :  fio or iozone
-benchmarking_tool: fio 
+benchmarking_tool: iozone 

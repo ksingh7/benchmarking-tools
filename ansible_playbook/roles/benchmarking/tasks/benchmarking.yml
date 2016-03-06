@@ -9,6 +9,10 @@
     path: "{{ benchmarking_directory_path }}/"
     state: absent 
 
+- name: delete already existing benchmarking files
+  shell: "rm -f {{ mount_point }}/*"
+  ignore_errors: true
+
 - name: Create directory for benchmarking scripts
   file:
     path: "{{ benchmarking_directory_path }}"
