@@ -1,3 +1,6 @@
+[All]
+localhost ansible_python_interpreter=/usr/local/bin/python
+
 [common]
 bench-node[1:8]
 
